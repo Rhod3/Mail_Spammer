@@ -5,7 +5,6 @@
  */
 package labo.smtp;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -17,9 +16,9 @@ public class SMTPSpamGroup {
     private final String sender;
     private LinkedList<String> receivers = new LinkedList<>();
     
-    public SMTPSpamGroup(String s, String ... args){
+    public SMTPSpamGroup(String s, LinkedList<String> r){
         sender = s;
-        receivers.addAll(Arrays.asList(args));
+        receivers = r;
     }
     
     public String getSender() {
