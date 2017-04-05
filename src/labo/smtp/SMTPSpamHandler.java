@@ -94,6 +94,10 @@ public class SMTPSpamHandler {
                 System.out.println(response);
 
 // Send message data.
+                out.print("From: " + group.getSender() + "\r\n");
+                out.flush();
+                out.print("To: " + receiver_email + "\r\n");
+                out.flush();
                 command = message;
                 out.print(command + "\r\n");
                 out.flush();
