@@ -49,8 +49,7 @@ public class SMTPSpamHandler {
         System.out.println("Sending spam");
         Random randomGenerator = new Random();
 
-        for (Object o : groups) {
-            SMTPSpamGroup group = (SMTPSpamGroup) o;
+        for (SMTPSpamGroup group : groups) {
             int randomInt = randomGenerator.nextInt(messages.length);
             System.out.println(randomInt);
             SMTPSpamServerHandler s = new SMTPSpamServerHandler(group, messages[randomInt]);
