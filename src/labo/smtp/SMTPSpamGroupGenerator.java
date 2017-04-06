@@ -3,6 +3,7 @@ package labo.smtp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
@@ -30,33 +31,28 @@ public class SMTPSpamGroupGenerator {
     }
 
     /**
-     * Generate a number i of group from the email adresses given in the constructor
-     * @param i Number of group to generate
+     * Generate a number of groups from the email adresses given in the constructor
+     * @param numberOfGroup Number of group to generate
      * @return A LinkedList of SMTPSpamGroup
      */
-    public LinkedList<SMTPSpamGroup> generate(int i) {
+    public LinkedList<SMTPSpamGroup> generate(int numberOfGroup) {
         LinkedList<SMTPSpamGroup> result = new LinkedList<>();
         Random randomGenerator = new Random();
 
         int j = 0;
         // Group construction
-        while (j < i) {
-            // Sender selection
-            int idOfSender = randomGenerator.nextInt(emailAdresses.size());
-            String sender = emailAdresses.get(idOfSender);
+        while (j < numberOfGroup) {
+            
+            Collections.shuffle(emailAdresses);
+            String sender = emailAdresses.get(0);
             
             int numberOfReceivers = randomGenerator.nextInt(emailAdresses.size() - 3) + 2;
-            int k = 0;
             LinkedList<String> receivers = new LinkedList<>();
             
-            // Receiver selection
-            while (k < numberOfReceivers){
-                int m = randomGenerator.nextInt(emailAdresses.size() - 1);
-                if (!receivers.contains(emailAdresses.get(m)) && !emailAdresses.get(m).equals(sender)){
-                    receivers.add(emailAdresses.get(m));
-                    k++;
-                }
+            for (int k = 1; k < numberOfReceivers; k++){
+                receivers.add(emailAdresses.get(k));
             }
+            
             result.add(new SMTPSpamGroup(sender, receivers));
             j++;
         }
