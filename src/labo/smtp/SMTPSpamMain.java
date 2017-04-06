@@ -2,7 +2,7 @@ package labo.smtp;
 
 import java.util.Scanner;
 
-public class Labo_SMTP {
+public class SMTPSpamMain {
 
 
 

@@ -36,6 +36,7 @@ public class SMTPSpamHandler {
 
             while (scanner.hasNextLine()) {
                 tmp += scanner.nextLine() + "\n";
+                System.out.println(tmp);
             }
             messages[i] = tmp;
         }
