@@ -15,6 +15,11 @@ public class SMTPSpamGroupGenerator {
 
     private final ArrayList<String> emailAdresses;
 
+    /**
+     * Construct a array of all the adresses to be ready to generate a given number
+     * of SMTPSpamGroup
+     * @param email_adresses File that contains all the adresses, one by line
+     */
     public SMTPSpamGroupGenerator(File email_adresses) throws FileNotFoundException {
         emailAdresses = new ArrayList<>();
         Scanner scanner = new Scanner(email_adresses);
@@ -24,6 +29,11 @@ public class SMTPSpamGroupGenerator {
         }
     }
 
+    /**
+     * Generate a number i of group from the email adresses given in the constructor
+     * @param i Number of group to generate
+     * @return A LinkedList of SMTPSpamGroup
+     */
     public LinkedList<SMTPSpamGroup> generate(int i) {
         LinkedList<SMTPSpamGroup> result = new LinkedList<>();
         Random randomGenerator = new Random();
@@ -32,18 +42,15 @@ public class SMTPSpamGroupGenerator {
         // Group construction
         while (j < i) {
             // Sender selection
-            int randomInt = randomGenerator.nextInt(emailAdresses.size());
-            String sender = emailAdresses.get(randomInt);
+            int idOfSender = randomGenerator.nextInt(emailAdresses.size());
+            String sender = emailAdresses.get(idOfSender);
             
-            randomInt = randomGenerator.nextInt(emailAdresses.size() - 1);
-            while(randomInt < 2){
-                randomInt = randomGenerator.nextInt(emailAdresses.size() - 1);
-            }
+            int numberOfReceivers = randomGenerator.nextInt(emailAdresses.size() - 3) + 2;
             int k = 0;
             LinkedList<String> receivers = new LinkedList<>();
             
             // Receiver selection
-            while (k < randomInt){
+            while (k < numberOfReceivers){
                 int m = randomGenerator.nextInt(emailAdresses.size() - 1);
                 if (!receivers.contains(emailAdresses.get(m)) && !emailAdresses.get(m).equals(sender)){
                     receivers.add(emailAdresses.get(m));
